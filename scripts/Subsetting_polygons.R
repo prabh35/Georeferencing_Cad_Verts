@@ -20,13 +20,13 @@
 # Install required packages #
 #         NOTE: Only run this if you've never installed them before. If you have, 
 #         just use the "Needed libraries" code below.
-#install.packages("sp")
 #install.packages("mapview")
+#install.packages("sf")
 
 
 # Needed libraries #
-library(sp)               # For readOGR and writeOGR - reading and creating files
 library(mapview)          # For mapview - viewing shp polygon coordinates in a map
+library(sf)               # for st_read , st_write, and st_layers functions
 
 
 ## Check your current working directory and set it to your desired folder
@@ -43,8 +43,8 @@ getwd()               # Check that it has changed
 
 
 # Reading the shapefile into the R environment as a Spatial object.
-pp_pa <- rgdal::readOGR("source_kml_shp/ProtectedAreas_CPCAD_Trial.shp")
-ogrListLayers("source_kml_shp/ProtectedAreas_CPCAD_Trial.shp")
+pp_pa <- sf::st_read("source_kml_shp/ProtectedAreas_CPCAD_Trial.shp")
+sf::st_layers("source_kml_shp/ProtectedAreas_CPCAD_Trial.shp")
 
 # Create a data frame with only the names contained in the shapefile.
 #       NOTE: You can filter it to find the one you're looking for.
@@ -79,7 +79,7 @@ new_polygon <- split_pol # Change the split_pol to the right number
 
 
 # Export the shapefile. Change the name of the output file (layer = "file-name-here").
-rgdal::writeOGR(new_polygon, dsn = "outputs/subset_shp",
+sf::st_write(new_polygon, dsn = "outputs/subset_shp",
          driver = "ESRI Shapefile", layer = "file-name-here")
 
 
@@ -104,8 +104,8 @@ rgdal::writeOGR(new_polygon, dsn = "outputs/subset_shp",
 
 
 # Reading the shapefile into the R environment as a Spatial object.
-l_r <- rgdal::readOGR("source_kml_shp/LakesAndRivers_lhy_000c16a_f.shp")
-ogrListLayers("source_kml_shp/LakesAndRivers_lhy_000c16a_f.shp")
+l_r <- sf::st_read("source_kml_shp/LakesAndRivers_lhy_000c16a_f.shp")
+sf::st_layers("source_kml_shp/LakesAndRivers_lhy_000c16a_f.shp")
 
 # Create a data frame with only the names contained in the shapefile.
 #       NOTE: You can filter it to find the one you're looking for.
@@ -140,7 +140,7 @@ new_polygon <- split_pol # Change the split_pol to the right number
 
 
 # Export the shapefile. Change the name of the output file (layer = "file-name-here").
-rgdal::writeOGR(new_polygon, dsn = "outputs/subset_shp",
+sf::st_write(new_polygon, dsn = "outputs/subset_shp",
          driver = "ESRI Shapefile", layer = "file-name-here")
 
 
@@ -152,8 +152,8 @@ rgdal::writeOGR(new_polygon, dsn = "outputs/subset_shp",
 
 
 # Read the shapefile into the R environment as a Spatial object.
-c_t <- rgdal::readOGR("source_kml_shp/CensusSubdivisions_lcsd000b16a_e.shp")
-ogrListLayers("source_kml_shp/CensusSubdivisions_lcsd000b16a_e.shp")
+c_t <- sf::st_read("source_kml_shp/CensusSubdivisions_lcsd000b16a_e.shp")
+sf::st_layers("source_kml_shp/CensusSubdivisions_lcsd000b16a_e.shp")
 
 # Create a data frame with only the names contained in the shapefile.
 #       NOTE: You can filter it to find the one you're looking for.
@@ -188,7 +188,7 @@ new_polygon <- split_pol # Change the split_pol to the right number
 
 # Export the shapefile. Change the name of the output file (layer = "file-name-here")
 #         following the file naming conventions.
-rgdal::writeOGR(new_polygon, dsn = "outputs/subset_shp",
+sf::st_write(new_polygon, dsn = "outputs/subset_shp",
          driver = "ESRI Shapefile", layer = "file-name-here")
 
 
